@@ -132,11 +132,11 @@ public class MainService : IMainService
                 if (searchResults.Any())
                 {
                     Console.WriteLine("Search Results:");
+
                     Console.ForegroundColor = ConsoleColor.Green;
-
                     searchResults.ForEach(movie => Console.WriteLine(movie.Title));
-
                     Console.ForegroundColor = textColor;
+
                     searching = false;
                 }
                 else
