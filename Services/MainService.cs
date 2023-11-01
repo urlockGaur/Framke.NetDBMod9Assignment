@@ -37,7 +37,7 @@ public class MainService : IMainService
         //Extra code that doesn't add much imo
 
         //This is version 2.0. First attempt program would crash after entering a searchTerm in option 3. Only way i could get program to run
-        //was adding a 2nd Console.ReadLine() after the first.
+        //was adding a 2nd Console.ReadLine() after the first. The search term would read and print to console, but the program would crash again after
         //I copied/paste my code into a new repo and Visual Studio window - code works and program doesn't crash.
         //Spent a few hours trying to debug and nothing would come up that would indicate an error somewhere.
 
@@ -134,10 +134,7 @@ public class MainService : IMainService
                     Console.WriteLine("Search Results:");
                     Console.ForegroundColor = ConsoleColor.Green;
 
-                    foreach (var movie in searchResults)
-                    {
-                        Console.WriteLine(movie.Title);
-                    }
+                    searchResults.ForEach(movie => Console.WriteLine(movie.Title));
 
                     Console.ForegroundColor = textColor;
                     searching = false;
