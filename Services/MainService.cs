@@ -119,28 +119,42 @@ public class MainService : IMainService
             }
         }
         else if (movieLibraryMenu == "3")
+
         {
-            Console.WriteLine("Please enter a search term: ");
-            var searchTerm = Console.ReadLine();
+            bool searching = true;
 
-            var searchResults = _context.FindMovie(searchTerm);
-            if (searchResults.Any())
+            while (searching)
             {
-                Console.WriteLine("Search Results:");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Please enter a search term: ");
+                var searchTerm = Console.ReadLine();
 
-                foreach (var movie in searchResults)
+                var searchResults = _context.FindMovie(searchTerm);
+                if (searchResults.Any())
                 {
-                    Console.WriteLine(movie.Title);
+                    Console.WriteLine("Search Results:");
+                    Console.ForegroundColor = ConsoleColor.Green;
+
+                    foreach (var movie in searchResults)
+                    {
+                        Console.WriteLine(movie.Title);
+                    }
+
+                    Console.ForegroundColor = textColor;
+                    searching = false;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("No movies found. Hit the 'Enter' key to search again or type 'X' to close the program.");
+                    Console.ForegroundColor = textColor;
+                    string searchAgain = Console.ReadLine();
+
+                    if (searchAgain.Equals("X", StringComparison.OrdinalIgnoreCase))
+                    {
+                        searching = false;
+                    }
                 }
 
-                Console.ForegroundColor = textColor;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("No movies found. Please try alternate search criteria.");
-                Console.ForegroundColor = textColor;
             }
         }
     }
