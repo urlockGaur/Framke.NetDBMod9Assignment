@@ -36,8 +36,10 @@ public class MainService : IMainService
         //that changed text color but couldn't find it. I probably wouldn't use the below methodolgy again.
         //Extra code that doesn't add much imo
 
-        //This is version 2.0. First attempt program would crash after entering a searchTerm in option 3. Only way i could get program to run was adding a 2nd Console.ReadLine() after the first.
-        //I copied/paste my code into a new repo and Visual Studio window - code works and program doesn't crash. Spend a few hours trying to debug and nothing would come up that would indicate an error somewhere.
+        //This is version 2.0. First attempt program would crash after entering a searchTerm in option 3. Only way i could get program to run
+        //was adding a 2nd Console.ReadLine() after the first.
+        //I copied/paste my code into a new repo and Visual Studio window - code works and program doesn't crash.
+        //Spent a few hours trying to debug and nothing would come up that would indicate an error somewhere.
 
         //Menu
         ConsoleColor textColor = Console.ForegroundColor;
@@ -121,11 +123,10 @@ public class MainService : IMainService
             Console.WriteLine("Please enter a search term: ");
             var searchTerm = Console.ReadLine();
 
-            var searchResults = _context.FindMovie(searchTerm).Where(movie => movie.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-
+            var searchResults = _context.FindMovie(searchTerm);
             if (searchResults.Any())
             {
-                Console.WriteLine("Movies matching the search term:");
+                Console.WriteLine("Search Results:");
                 Console.ForegroundColor = ConsoleColor.Green;
 
                 foreach (var movie in searchResults)
@@ -138,7 +139,7 @@ public class MainService : IMainService
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("No movies found that match the search term.");
+                Console.WriteLine("No movies found. Please try alternate search criteria.");
                 Console.ForegroundColor = textColor;
             }
         }

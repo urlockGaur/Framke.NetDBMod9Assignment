@@ -36,7 +36,7 @@ namespace ContextExample.Data
         public List<Movie> FindMovie(string title)
         {
             // find by title - could return more than one item
-            return new List<Movie>();
+            return Movies.Where(movie => movie.Title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
         }
     }
 }
